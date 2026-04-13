@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #171717;
+  --primary-dark: #000000;
+  --accent: #d4af37;
+  --dark-bg: #000000;
+  --dark-surface: #0a0a0a;
+  --dark-card: #111111;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Satoshi', sans-serif;
+  background: #fafafa;
+  color: #171717;
+  min-height: 100vh;
+}
+
+body.dark {
+  background: var(--dark-bg);
+  color: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Clash Display', sans-serif;
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 border border-transparent;
+    @apply hover:-translate-y-0.5 shadow-sm active:translate-y-0 text-sm tracking-wide;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white;
+    @apply hover:bg-primary-600;
+  }
+  
+  .btn-secondary {
+    @apply bg-neutral-100 text-neutral-900;
+    @apply hover:bg-neutral-200;
+  }
+  
+  .btn-dark {
+    @apply bg-neutral-900 text-white;
+    @apply hover:bg-neutral-800;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-dark-card rounded-2xl shadow-sm border border-neutral-100 dark:border-neutral-900;
+    @apply transition-all duration-500;
+  }
+  
+  .input {
+    @apply w-full px-4 py-3 rounded-lg border border-neutral-200 dark:border-neutral-800 text-sm;
+    @apply focus:outline-none focus:border-neutral-800 dark:focus:border-neutral-400 focus:ring-1 focus:ring-neutral-800 dark:focus:ring-neutral-400;
+    @apply transition-all duration-300;
+    @apply bg-neutral-50 dark:bg-dark-surface;
+  }
+  
+  .skeleton {
+    @apply bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200;
+    @apply animate-shimmer bg-[length:200%_100%];
+  }
+  
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-500 to-accent-500;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Selection */
+::selection {
+  background: rgba(14, 165, 233, 0.2);
+  color: #171717;
+}
+
+.dark ::selection {
+  background: rgba(14, 165, 233, 0.3);
+  color: #fafafa;
+}
+
+/* Focus states */
+*:focus-visible {
+  @apply outline-none ring-1 ring-accent-500 ring-offset-2 ring-offset-white dark:ring-offset-black;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #333333;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
