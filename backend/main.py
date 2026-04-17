@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import Base, engine
-from app.routers import auth, products, cart, wishlist, orders, admin, addresses, coupons, payments, ai
+from app.routers import auth, products, cart, wishlist, orders, admin, addresses, coupons, payments
 
 Base.metadata.create_all(bind=engine)
 
@@ -28,7 +28,7 @@ app.include_router(addresses.router)
 app.include_router(coupons.router)
 app.include_router(payments.router)
 app.include_router(admin.router)
-app.include_router(ai.router)
+
 
 
 @app.get("/api/health")

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import Header from './Header'
 import Footer from './Footer'
-import ChatAssistant from './ChatAssistant'
 
 export default function Layout({ children }) {
   return (
@@ -16,7 +15,6 @@ export default function Layout({ children }) {
         {children}
       </motion.main>
       <Footer />
-      <ChatAssistant />
     </div>
   )
 }
