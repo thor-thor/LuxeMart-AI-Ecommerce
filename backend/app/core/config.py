@@ -4,7 +4,7 @@ from typing import Optional
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost/ecommerce"
+    DATABASE_URL: str = "sqlite+pysqlite:///./ecommerce.db"
     JWT_SECRET: str = "your-super-secret-key-change-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
@@ -19,6 +19,19 @@ class Settings(BaseSettings):
     
     RAZORPAY_KEY_ID: Optional[str] = None
     RAZORPAY_KEY_SECRET: Optional[str] = None
+
+    UPI_MERCHANT_ID: Optional[str] = None
+    UPI_MERCHANT_KEY: Optional[str] = None
+    UPI_PAYMENT_URL: str = "https://api.razorpay.com/v1/payments"
+
+    WEBHOOK_SECRET: Optional[str] = None
+
+    COD_ENABLED: bool = True
+    MAX_COD_AMOUNT: float = 50000.0
+
+    # Development/Testing: enable simulation mode for UPI payments
+    # Set to False in production. Enable true when UPI credentials not configured.
+    SIMULATE_PAYMENTS: bool = True
     
     class Config:
         env_file = ".env"

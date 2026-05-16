@@ -138,9 +138,34 @@ INSERT INTO products (name, description, price, original_price, category, image_
 ('Sunglasses', 'UV protection polarized sunglasses', 129.99, 159.99, 'Fashions', '/images/fashions/6.webp', 50, 4.7, 45, FALSE, TRUE),
 ('Cotton T-Shirt Pack', 'Pack of 3 premium cotton t-shirts', 49.99, 69.99, 'Fashions', '/images/fashions/7.webp', 120, 4.3, 156, FALSE, FALSE);
 
+-- Payment Transactions Table (Audit Trail)
+CREATE TABLE payment_transactions (
+    id SERIAL PRIMARY KEY,
+    order_id INT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    payment_method VARCHAR(50) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) DEFAULT 'INR',
+    status VARCHAR(50) DEFAULT 'pending',
+    razorpay_order_id VARCHAR(255),
+    razorpay_payment_id VARCHAR(255),
+    razorpay_signature VARCHAR(255),
+    upi_transaction_id VARCHAR(255),
+    upi_merchant_id VARCHAR(255),
+    payment_gateway_response TEXT,
+    webhook_verified BOOLEAN DEFAULT FALSE,
+    signature_verified BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_payment_transactions_order ON payment_transactions(order_id);
+CREATE INDEX idx_payment_transactions_status ON payment_transactions(status);
+
 -- Verify Data
 SELECT 'Users' as table_name, COUNT(*) as count FROM users
 UNION ALL
 SELECT 'Products', COUNT(*) FROM products
+UNION ALL
+SELECT 'Payment Transactions', COUNT(*) FROM payment_transactions
 UNION ALL
 SELECT 'Categories', COUNT(DISTINCT category) FROM products;

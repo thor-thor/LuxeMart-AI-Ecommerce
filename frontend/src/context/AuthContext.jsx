@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import api from '../services/api'
-import { signInWithGoogle, isFirebaseConfigured } from '../firebase'
+import { isFirebaseConfigured, signInWithGoogle } from '../firebase'
 import { getAuth as getFirebaseAuth } from 'firebase/auth'
 
 const AuthContext = createContext()
@@ -88,9 +88,9 @@ export function AuthProvider({ children }) {
 
   function logout() {
     try {
-      const firebaseAuth = getFirebaseAuth()
-      if (firebaseAuth) {
-        firebaseAuth.signOut()
+      const fbAuth = getFirebaseAuth()
+      if (fbAuth) {
+        fbAuth.signOut()
       }
     } catch (e) {
       // Firebase not initialized, ignore

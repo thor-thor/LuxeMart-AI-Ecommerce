@@ -96,9 +96,10 @@ class Order(Base):
     payment_status = Column(String(50), default="pending")
     shipping_address = Column(Text)
     created_at = Column(DateTime, server_default=func.now())
-    
+
     user = relationship("User", back_populates="orders")
     items = relationship("OrderItem", back_populates="order", cascade="all, delete-orphan")
+    payment_transactions = relationship("PaymentTransaction", back_populates="order", cascade="all, delete-orphan")
 
 
 class OrderItem(Base):
